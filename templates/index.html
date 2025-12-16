@@ -1,36 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Image Colorization</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<h2>Image Colorization using Deep Learning</h2>
+<div class="container">
+    <h1>Image Colorization</h1>
+    <p class="subtitle">
+        Upload a grayscale image and convert it into a color image using deep learning.
+    </p>
 
-<form method="POST" enctype="multipart/form-data">
-    <input type="file" name="image" required>
-    <br><br>
-    <button type="submit">Colorize Image</button>
-</form>
+    <form method="POST" enctype="multipart/form-data" class="upload-form">
+        <input type="file" name="image" required>
+        <button type="submit">Colorize Image</button>
+    </form>
 
-{% if original_image and colorized_image %}
-<div class="result">
-    <div>
-        <h3>Original Image</h3>
-        <img src="{{ original_image }}" width="300">
+    {% if original_image and colorized_image %}
+    <div class="image-grid">
+        <div class="image-card">
+            <h3>Original Image</h3>
+            <img src="{{ original_image }}">
+        </div>
+
+        <div class="image-card">
+            <h3>Colorized Image</h3>
+            <img src="{{ colorized_image }}">
+            <a href="{{ colorized_image }}" download class="download-btn">
+                Download Image
+            </a>
+        </div>
     </div>
-
-    <div>
-        <h3>Colorized Image</h3>
-        <img src="{{ colorized_image }}" width="300">
-        <br><br>
-        <a href="{{ colorized_image }}" download>
-            <button>Download Colorized Image</button>
-        </a>
-    </div>
+    {% endif %}
 </div>
-{% endif %}
+
+<footer>
+    <p>Built with Deep Learning & OpenCV</p>
+</footer>
 
 </body>
 </html>
